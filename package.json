@@ -1,5 +1,5 @@
 {
-    "name": "@dispacc/receipt-ocr",
+    "name": "receipt-ocr-ng",
     "version": "1.0.1",
     "description": "AI‑powered receipt OCR for Nigerian fintech transactions (Opay, PalmPay, Kuda, etc.) – extracts structured data from images",
     "main": "dist/index.js",

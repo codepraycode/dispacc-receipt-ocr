@@ -1,8 +1,8 @@
-# @dispacc/receipt-ocr
+# receipt-ocr-ng
 
 **AI‑powered receipt OCR for Nigerian fintech transactions** (Opay, PalmPay, Kuda, Moniepoint, GTBank, etc.). Extracts structured transaction data directly from receipt images.
 
-[![npm version](https://badge.fury.io/js/%40dispacc%2Freceipt-ocr.svg)](https://www.npmjs.com/package/@dispacc/receipt-ocr)
+[![npm version](https://badge.fury.io/js/receipt-ocr-ng.svg)](https://www.npmjs.com/package/receipt-ocr-ng)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 Features
@@ -16,9 +16,9 @@
 ## 📦 Installation
 
 ```bash
-npm install @dispacc/receipt-ocr groq-sdk
+npm install receipt-ocr-ng groq-sdk
 # or
-pnpm add @dispacc/receipt-ocr groq-sdk
+pnpm add receipt-ocr-ng groq-sdk
 ```
 
 ## 🔑 Setup
@@ -35,7 +35,7 @@ GROQ_API_KEY=gsk_your_key_here
 ### TypeScript / JavaScript
 
 ```typescript
-import { createExtractor } from '@dispacc/receipt-ocr';
+import { createExtractor } from 'receipt-ocr-ng';
 
 const extractor = createExtractor({
     groqApiKey: process.env.GROQ_API_KEY!,
