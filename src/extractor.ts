@@ -139,12 +139,13 @@ Analyze the image carefully. If a field is missing, not visible, or completely i
                 fee: parsed.fee !== null && parsed.fee !== undefined ? Number(parsed.fee) : null,
             };
 
-            // If amount coercion produced NaN, fall back to null
+            // If amount coercion produced NaN, fall back to null (per prompt:
+            // an unreadable value is null, not a misleading 0).
             if (transaction.amount !== null && isNaN(transaction.amount)) {
-                transaction.amount = 0;
+                transaction.amount = null;
             }
             if (transaction.fee !== null && isNaN(transaction.fee)) {
-                transaction.fee = 0;
+                transaction.fee = null;
             }
 
             return { transaction, rawResponse };

@@ -1,5 +1,11 @@
 export { ReceiptExtractor } from './extractor';
-export type { TransactionRecord, ExtractorConfig, ExtractResult, TransactionStatus } from './types';
+export type {
+    TransactionRecord,
+    ExtractorConfig,
+    ExtractResult,
+    TransactionStatus,
+    TransactionDirection,
+} from './types';
 
 // Convenience factory
 import { ReceiptExtractor } from './extractor';
