@@ -2,6 +2,7 @@ export type TransactionStatus = 'successful' | 'failed' | 'pending';
 
 export interface TransactionRecord {
     amount: number;
+    fee: number;
     currency: string;
     sender: string | null;
     recipient: string | null;
@@ -20,6 +21,7 @@ export interface ExtractorConfig {
 }
 
 export interface ExtractResult {
-    transaction: TransactionRecord;
+    transaction: TransactionRecord | null;
     rawResponse: string;
+    error?: string;
 }
