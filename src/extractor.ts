@@ -58,7 +58,8 @@ export class ReceiptExtractor {
 
         const chatCompletion = await this.client.chat.completions.create({
             // Meta-Llama-4 excels at visual JSON layout tracking
-            model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+            //model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+            model: 'qwen/qwen3.6-27b',
             messages: [
                 {
                     role: 'user',
