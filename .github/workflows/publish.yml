@@ -1,11 +1,10 @@
 name: Publish to npm
-
 on:
   push:
     branches: [main]
     paths:
       - 'package.json'
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -13,7 +12,8 @@ jobs:
     permissions:
       contents: read
       id-token: write
-
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - uses: actions/checkout@v4
 
