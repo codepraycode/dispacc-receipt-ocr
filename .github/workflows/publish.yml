@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # Retained: Required to request the OIDC token from GitHub
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22' # Upgraded: Ensures npm v11.5.1+ is available for OIDC
-          registry-url: 'https://npmjs.org'
+          node-version: '22'
+          # Removed registry-url from here to fix the npm install 403 error
 
-      - run: npm install
+      # Upgraded to npm ci for faster, predictable, and clean CI installations
+      - run: npm ci
 
       - run: npm run build --if-present
 
-      # Modified: Removed the NODE_AUTH_TOKEN environment variable completely
-      # Added: --provenance generates a secure cryptographic link back to this commit
+      # Pass the registry directly to the publish command instead
       - name: Publish
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --registry=https://npmjs.org
