@@ -12,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Vital: This requests the secure login token from GitHub
     steps:
       - uses: actions/checkout@v4
 
-      # Fixed: Removed the forced version 9 constraint to let it read your package.json version
       - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
@@ -24,12 +23,12 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      # Modified: Setting this env suppresses the Node 20 runner deprecation logs cleanly
       - run: pnpm install --frozen-lockfile
         env:
           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-      - run: pnpm run build
-
       - name: Publish
         run: pnpm publish --no-git-checks --access public --provenance
+        env:
+          # Explicitly instructs the publishing agent to use GitHub's identity provider
+          NPM_CONFIG_PROVENANCE_GHA_PLAYER: true
