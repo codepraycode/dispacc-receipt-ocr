@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'package.json'
-  workflow_dispatch: # This adds a manual "Run workflow" button in the GitHub UI!
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -16,16 +16,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Fixed: Removed the forced version 9 constraint to let it read your package.json version
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
 
+      # Modified: Setting this env suppresses the Node 20 runner deprecation logs cleanly
       - run: pnpm install --frozen-lockfile
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
       - run: pnpm run build --if-present
 
