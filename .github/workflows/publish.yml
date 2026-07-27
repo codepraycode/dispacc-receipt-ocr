@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Retained: Required to request the OIDC token from GitHub
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '22' # Upgraded: Ensures npm v11.5.1+ is available for OIDC
+          registry-url: 'https://npmjs.org'
 
       - run: npm install
 
       - run: npm run build --if-present
 
+      # Modified: Removed the NODE_AUTH_TOKEN environment variable completely
+      # Added: --provenance generates a secure cryptographic link back to this commit
       - name: Publish
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance
