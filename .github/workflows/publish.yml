@@ -12,19 +12,16 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Enable pnpm via corepack
+        run: corepack enable && corepack prepare pnpm@10 --activate
 
       - name: Ensure npm supports trusted publishing
         run: npm install -g npm@11.5.1
