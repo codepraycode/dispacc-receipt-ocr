@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'package.json'
-  workflow_dispatch:
+  workflow_dispatch: # This adds a manual "Run workflow" button in the GitHub UI!
 
 jobs:
   publish:
@@ -16,16 +16,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          # Removed registry-url from here to fix the npm install 403 error
+          cache: 'pnpm'
 
-      # Upgraded to npm ci for faster, predictable, and clean CI installations
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
 
-      - run: npm run build --if-present
+      - run: pnpm run build --if-present
 
-      # Pass the registry directly to the publish command instead
       - name: Publish
-        run: npm publish --access public --provenance --registry=https://npmjs.org
+        run: pnpm publish --no-git-checks --access public --provenance
