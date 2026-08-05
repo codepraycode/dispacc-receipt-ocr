@@ -72,6 +72,8 @@ export class ReceiptExtractor {
             temperature: 0, // Keep at 0 for deterministic extractions
             max_tokens: 1024,
             response_format: { type: 'json_object' }, // Enforces JSON natively
+            reasoning_format: 'hidden',
+            reasoning_effort: 'none',
         });
 
         const rawResponse = chatCompletion.choices[0]?.message?.content;
